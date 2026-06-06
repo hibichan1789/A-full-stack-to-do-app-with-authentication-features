@@ -28,7 +28,7 @@ postgreSQLの起動
 パッケージの復元  
 - dotnet watch
 APIの起動  
-APIが起動したら、"http://localhost:ポート番号/swagger/index.html"にアクセスして、APIのエンドポイントを確認できることを確認する  
+APIが起動したら、http://localhost:<ポート番号>/swagger/index.html"にアクセスして、APIのエンドポイントを確認できることを確認する  
 
 
 
@@ -40,3 +40,6 @@ DockerでPostgreSQLを立ち上げてASP.NET Core APIと接続するときにポ
 
 Swaggerで認証の機能を作るときに、HS256で暗号化するが鍵の長さが足りないとエラーが出てしまうため、そこでエラーの原因を探すのに時間がかかった  
 エラーが鍵の長さが足りないことを発見できたのは、break pointを使用して、1行ごとにコードを確認していったからである  
+
+ASP.NET Core APIが"sub"をClaimTypes.NameIdentifierにマッピングしていたためFind("sub")がnullを返してしまっていたため、ユーザIDを取得できなかった  
+しかしFind(ClaimTypes.NameIdentifier)に変更することで、ユーザIDを取得できるようになった  
