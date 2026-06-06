@@ -1,0 +1,29 @@
+# --- .NET ---
+bin/
+obj/
+out/
+*.user
+*.suo
+
+# --- Visual Studio ---
+.vs/
+
+# --- VS Code ---
+.vscode/
+
+# --- Node / Vite ---
+node_modules/
+dist/
+*.log
+
+# --- Environment ---
+.env
+
+
+# --- Docker ---
+pgdata/
+docker-compose.override.yml
+
+# --- OS ---
+.DS_Store
+Thumbs.db
