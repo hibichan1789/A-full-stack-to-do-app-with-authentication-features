@@ -12,9 +12,11 @@ namespace TodoAuthApi.Controllers
     public class UserController : ControllerBase
     {
         private readonly IRegisterService _registerService;
-        public UserController(IRegisterService registerService)
+        private readonly ILoginService _loginService;
+        public UserController(IRegisterService registerService, ILoginService loginService)
         {
             _registerService = registerService;
+            _loginService = loginService;
         }
 
         // POST: api/User/register
@@ -60,6 +62,31 @@ namespace TodoAuthApi.Controllers
                 Email = userAfterRegistered.Email
             };
             return Ok(userRegisterResponse);
+        }
+
+        [HttpPost("login")]
+        public async Task<ActionResult> Login(UserLoginRequest userLoginRequest)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            string token;
+            try
+            {
+                token = await _loginService.LoginAsync(userLoginRequest.Email, userLoginRequest.Password);
+            }
+            catch(InvalidOperationException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (Exception)
+            {
+                return Problem("サーバーエラーです");
+            }
+
+            return Ok(new { token = token });
         }
     }
 }
