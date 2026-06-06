@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 using System.Text;
 using TodoAuthApi.Context;
+using TodoAuthApi.Services.TodoService;
 using TodoAuthApi.Services.UserService;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -61,6 +62,7 @@ builder.Services.AddAuthorization();
 // Custom Service
 builder.Services.AddScoped<IRegisterService, RegisterService>();
 builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddScoped<ITodoService, TodoService>();
 
 
 
