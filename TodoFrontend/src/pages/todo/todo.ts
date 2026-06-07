@@ -51,22 +51,31 @@ function createTodoCell(todo: TodoResponse): HTMLTableRowElement {
 
     const titleTd = document.createElement("td");
     titleTd.textContent = todo.title;
+    titleTd.classList.add("px-4", "py-2");
     tr.appendChild(titleTd);
 
     const isCompletedTd = document.createElement("td");
-    isCompletedTd.textContent = todo.isCompleted ? "✅" : "❌";
+    isCompletedTd.textContent = todo.isCompleted ? "完了" : "未完了";
+    isCompletedTd.classList.add("px-4", "py-2", "font-semibold", todo.isCompleted ? "text-green-600" : "text-red-600");
     tr.appendChild(isCompletedTd);
+
+    const createdAtTd = document.createElement("td");
+    createdAtTd.textContent = formatDate(todo.createdAt);
+    createdAtTd.classList.add("px-4", "py-2");
+    tr.appendChild(createdAtTd);
+
 
     const detailButtonTd = document.createElement("td");
     const detailButton = document.createElement("button");
     detailButton.textContent = "詳細";
-    detailButton.classList.add("bg-blue-500", "text-white", "px-2", "py-1", "rounded");
+    detailButton.classList.add("bg-blue-500", "text-white", "px-4", "py-1", "rounded", "hover:bg-blue-600", "transition-colors", "cursor-pointer");
     // 詳細ボタンにModalを開くイベントを持たせる
     detailButton.addEventListener("click", ()=>{
         openModal(todo.id);
     })
     detailButtonTd.appendChild(detailButton);
     tr.appendChild(detailButtonTd);
+    tr.classList.add("hover:bg-gray-50", "transition-colors")
 
     return tr;
 }
@@ -102,10 +111,12 @@ function openModal(id: number) {
     modalUpdateIsCompletedInput.checked = detailTodo.isCompleted;
 
     detailModal.classList.remove("hidden");
+    detailModal.classList.add("flex");
 }
 // Modalを閉じる
 modalCloseButton.addEventListener("click", () => {
     detailModal.classList.add("hidden");
+    detailModal.classList.remove("flex");
 });
 
 // Todo追加
@@ -152,6 +163,7 @@ modalUpdateForm.addEventListener("submit", async (e) => {
 modalDeleteButton.addEventListener("click", async () => {
     await deleteTodo(Number(modalUpdateIdInput.value));
     detailModal.classList.add("hidden");
+    detailModal.classList.remove("flex");
     await loadTodos();
 });
 
