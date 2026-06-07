@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>アカウント登録</title>
+        <script type="module" src="./register.ts" defer></script>
+    </head>
+    <body>
+        <h1>アカウント登録</h1>
+        <form id="registerForm">
+            <div>
+                <label for="userName">ユーザー名</label>
+                <input id="userName" type="text" required>
+            </div>
+            <div>
+                <label for="email">メールアドレス</label>
+                <input id="email" type="email" required>
+            </div>
+            <div>
+                <label for="password">パスワード</label>
+                <input id="password" type="password" required>
+            </div>
+            <button type="submit">登録</button>
+        </form>
+        <p>
+        </p>
+            <a href="/src/pages/login/login.html">すでにアカウントをお持ちの方はこちら</a>
+        </p>
+    </body>
+</html>
