@@ -16,7 +16,7 @@ form.addEventListener("submit", async (e)=> {
     };
 
     try{
-        const response = await register(data);
+        await register(data);
 
         window.alert("登録が成功しました。ログインページに遷移します。");
 
