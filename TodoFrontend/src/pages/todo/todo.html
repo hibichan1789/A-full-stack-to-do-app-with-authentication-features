@@ -9,24 +9,30 @@
     <link rel="stylesheet" href="../../../src/style.css">
 </head>
 
-<body>
-    <h1>Todoリスト</h1>
+<body class="min-h-screen bg-gray-100 p-6">
+    <h1 class="text-3xl font-bold text-center mb-8 text-gray-800 tracking-wide">Todoリスト</h1>
 
-    <form id="todoForm">
+    <form id="todoForm" class="bg-white shadow-md rounded-lg p-6 mb-6 space-y-4 max-w-xl mx-auto">
         <div>
-            <label for="title">タイトル</label>
-            <input id="title" type="text" placeholder="新しいTodoのタイトル" required>
+            <label for="title" class="block font-medium mb-1">タイトル</label>
+            <input id="title" type="text" placeholder="新しいTodoのタイトル" required
+                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
         </div>
         <div>
-            <label for="description">詳細</label>
-            <input id="description" type="text" placeholder="新しいTodoの詳細">
+            <label for="description" class="block font-medium mb-1">詳細</label>
+            <input id="description" type="text" placeholder="新しいTodoの詳細"
+                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
         </div>
-        <button type="submit">追加</button>
+        <button type="submit"
+            class="w-full bg-blue-600 text-white py-2 font-semibold rounded hover:bg-blue-700 transition-colors cursor-pointer">
+            追加
+        </button>
     </form>
 
-    <div id="detailModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center">
-        <div class="bg-white shadow-lg w-96 p-6">
+    <div id="detailModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center">
+        <div class="bg-white w-full max-w-md  rounded-lg shadow-lg p-6 animate-fadeIn">
             <h2 class="text-xl font-bold mb-4">Todo詳細</h2>
+
             <div class="space-y-2 mb-4">
                 <p><span class="font-semibold">タイトル:</span> <span id="modalTitle"></span></p>
                 <p><span class="font-semibold">詳細:</span> <span id="modalDescription"></span></p>
@@ -34,45 +40,56 @@
                 <p><span class="font-semibold">更新日:</span> <span id="modalUpdatedAt"></span></p>
             </div>
 
-            <form id="modalUpdateForm" class="space-y-4">
+            <form id="modalUpdateForm" class="space-y-4 mb-6">
                 <input type="hidden" id="modalUpdateId">
                 <div>
-                    <label for="modalUpdateTitle">タイトル</label>
-                    <input type="text" id="modalUpdateTitle" placeholder="Todoのタイトル" required>
+                    <label for="modalUpdateTitle" class="block font-medium mb-1">タイトル</label>
+                    <input type="text" id="modalUpdateTitle" placeholder="Todoのタイトル" required
+                        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
                 </div>
                 <div>
-                    <label for="modalUpdateDescription">詳細</label>
-                    <input type="text" id="modalUpdateDescription" placeholder="Todoの詳細">
+                    <label for="modalUpdateDescription" class="block font-medium mb-1">詳細</label>
+                    <input type="text" id="modalUpdateDescription" placeholder="Todoの詳細"
+                        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
                 </div>
-                <div>
-                    <label for="modalUpdateIsCompleted">完了済み</label>
+                <div class="flex items-center space-x-2">
+                    <label for="modalUpdateIsCompleted" class="font-medium">完了済み</label>
                     <input type="checkbox" id="modalUpdateIsCompleted">
                 </div>
-                <button type="submit">更新</button>
+                <button type="submit"
+                    class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors cursor-pointer">
+                    更新
+                </button>
             </form>
-            <button id="modalDeleteButton">
+            <button id="modalDeleteButton"
+                class="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700 transition-colors cursor-pointer mb-6">
                 削除
             </button>
-            <button id="modalCloseButton">
+            <button id="modalCloseButton"
+                class="w-full bg-gray-600 text-black py-2 rounded hover:bg-gray-700 transition-colors cursor-pointer">
                 閉じる
             </button>
         </div>
     </div>
 
-    <table id="todoTable">
-        <thead>
+    <table id="todoTable" class="w-full max-w-4xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
+        <thead class="bg-gray-200">
             <tr>
-                <th>タイトル</th>
-                <th>完了済み</th>
-                <th>作成日</th>
-                <th>詳細</th>
+                <th class="px-4 py-2 text-left">タイトル</th>
+                <th class="px-4 py-2 text-left">完了済み</th>
+                <th class="px-4 py-2 text-left">作成日</th>
+                <th class="px-4 py-2 text-left">詳細</th>
             </tr>
         </thead>
-        <tbody id="todoTableBody">
+        <tbody id="todoTableBody" class="divide-y divide-gray-200">
         </tbody>
     </table>
 
-    <button id="logoutButton">ログアウト</button>
+    <button id="logoutButton"
+        class="block mx-auto mt-8 bg-gray-700 text-white px-6 py-2 rounded hover:bg-gray-800 transition-colors cursor-pointer"
+    >
+        ログアウト
+    </button>
 </body>
 
 </html>
