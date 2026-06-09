@@ -35,9 +35,7 @@ namespace TodoAuthApi.Services.UserService
                 throw new InvalidOperationException("ログインに失敗しました");
             }
 
-            Console.WriteLine($"Issuer: {_config["Jwt:Issuer"]}");
-            Console.WriteLine($"Audience: {_config["Jwt:Audience"]}");
-            Console.WriteLine($"Key: {_config["Jwt:Key"]}");
+
 
 
             return GenerateJwtToken(user);
