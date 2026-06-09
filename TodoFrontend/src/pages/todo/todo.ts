@@ -25,6 +25,7 @@ const todoTableBody = document.getElementById("todoTableBody") as HTMLTableSecti
 const detailModal = document.getElementById("detailModal") as HTMLDivElement;
 const modalTitle = document.getElementById("modalTitle") as HTMLSpanElement;
 const modalDescription = document.getElementById("modalDescription") as HTMLSpanElement;
+const modalSummary = document.getElementById("modalSummary") as HTMLSpanElement;
 const modalCreatedAt = document.getElementById("modalCreatedAt") as HTMLSpanElement;
 const modalUpdatedAt = document.getElementById("modalUpdatedAt") as HTMLSpanElement;
 // Modal更新用の要素
@@ -101,6 +102,7 @@ function openModal(id: number) {
     // Modal詳細用
     modalTitle.textContent = detailTodo.title;
     modalDescription.textContent = detailTodo.description ?? "";
+    modalSummary.textContent = detailTodo.summary ?? "";
     modalCreatedAt.textContent = formatDate(detailTodo.createdAt);
     modalUpdatedAt.textContent = formatDate(detailTodo.updatedAt);
 
@@ -147,6 +149,7 @@ modalUpdateForm.addEventListener("submit", async (e) => {
     // Modal詳細用
     modalTitle.textContent = detailTodo.title;
     modalDescription.textContent = detailTodo.description ?? "";
+    modalSummary.textContent = detailTodo.summary ?? "";
     modalCreatedAt.textContent = formatDate(detailTodo.createdAt);
     modalUpdatedAt.textContent = formatDate(detailTodo.updatedAt);
 

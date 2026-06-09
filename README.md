@@ -1,15 +1,28 @@
-# JWT認証機能付きフルスタックTodoアプリ
+# JWT認証機能付きフルスタックTodoアプリ、要約機能付き
 
 PostgreSQLをDocker,ASP.NET Core APIとVite Vanilla TSはローカルで開発する 
 StyleはTailwind CSSを採用 
+APIからAzure Functions経由してpythonの処理を実装
 
 ## 技術選定理由
 PostgreSQLのみをdockerで構成しているのは、DBをDockerで作ることで簡単にDBを作り直すことができるため、練習段階の自分に合っていると思った  
+
 まだASP.NET CoreやTSの開発は練習段階のためDockerでフロントエンドやバックエンドも立ち上げると、手詰まりが起きそうなため、ローカル開発で慣れてきたらDockerでやってみようと思う  
+
 認証はJWTを採用しているが、JWTはクライアント側でトークンを管理するため、セッション管理が不要であることや、スケーラビリティが高いことから選定した  
+
 API(ASP.NET Core) + フロントエンド(Vite,TS) + 複数HTMLは、MVCよりページ遷移や動作が早く、開発もフロントエンドだけに集中して開発できる　　
 Viteを使うことで、ホットリロードが効くため開発がスムーズになる　　
+
 tailwind cssを導入することでcssファイルを開くことなく、HTML,Typescriptファイルに直接スタイルを書き込めるのでUI調整がしやすい  
+
+Todo アプリに「要約機能」を追加するにあたり、アプリ本体の API とは独立した処理基盤が必要だったため Azure Functions を採用した  
+Functions はサーバーレスで動作するため、要約処理のような 負荷が変動しやすい非同期処理 を API 本体から切り離して実行でき,要約処理のような 負荷が変動しやすい非同期処理 を ASP.NET Core API から切り離して実行できる  　
+Functionsを採用により実務で使っている言語であるpythonとの連携を簡単に取ることができる   
+pydanticを採用することで、ASP.NET Coreの堅牢なシステムとpythonの柔軟性を持ちつつも型安全に連携をとることができる  
+curlコマンドで動作確認がすぐにできるためスピーディな開発に適していると考える  
+
+
 
 ## githubからクローン後動作手順  
 ### postgreSQL
