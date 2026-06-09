@@ -9,8 +9,7 @@ out/
 .vs/
 
 # --- VS Code ---
-.vscode/
-
+.vscode
 # --- Node / Vite ---
 node_modules/
 dist/
@@ -18,7 +17,7 @@ dist/
 
 # --- Environment ---
 .env
-
+.venv
 
 # --- Docker ---
 pgdata/
@@ -27,3 +26,9 @@ docker-compose.override.yml
 # --- OS ---
 .DS_Store
 Thumbs.db
+
+# --- Azure Functions ---
+__azurite_db_*.json
+local.settings.json
+__pycache__
+__blobstorage__
