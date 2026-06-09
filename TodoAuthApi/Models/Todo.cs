@@ -12,6 +12,7 @@ namespace TodoAuthApi.Models
         [StringLength(maximumLength: 200)]
         public String Title { get; set; } = String.Empty;
         public String? Description { get; set; }
+        public String? Summary { get; set; }
         public bool IsCompleted { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }

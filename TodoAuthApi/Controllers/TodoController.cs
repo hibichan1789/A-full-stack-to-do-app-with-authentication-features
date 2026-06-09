@@ -37,6 +37,7 @@ namespace TodoAuthApi.Controllers
                 Id = t.Id,
                 Title = t.Title,
                 Description = t.Description,
+                Summary = t.Summary,
                 IsCompleted = t.IsCompleted,
                 CreatedAt = t.CreatedAt,
                 UpdatedAt = t.UpdatedAt
@@ -62,6 +63,7 @@ namespace TodoAuthApi.Controllers
                 Id = todo.Id,
                 Title = todo.Title,
                 Description = todo.Description,
+                Summary = todo.Summary,
                 IsCompleted = todo.IsCompleted,
                 CreatedAt = todo.CreatedAt,
                 UpdatedAt = todo.UpdatedAt
@@ -87,6 +89,7 @@ namespace TodoAuthApi.Controllers
                 Id = newTodo.Id,
                 Title = newTodo.Title,
                 Description = newTodo.Description,
+                Summary= newTodo.Summary,
                 IsCompleted = newTodo.IsCompleted,
                 CreatedAt = newTodo.CreatedAt,
                 UpdatedAt = newTodo.UpdatedAt
@@ -125,6 +128,7 @@ namespace TodoAuthApi.Controllers
                 Id = updatedTodo.Id,
                 Title = updatedTodo.Title,
                 Description = updatedTodo.Description,
+                Summary = updatedTodo.Summary,
                 IsCompleted = updatedTodo.IsCompleted,
                 CreatedAt = updatedTodo.CreatedAt,
                 UpdatedAt = updatedTodo.UpdatedAt
