@@ -2,6 +2,7 @@ export interface TodoResponse{
     id: number;
     title: string;
     description?: string;
+    summary?: string;
     isCompleted: boolean;
     createdAt: string; // APIではDateTime型で扱っているが、フロントエンドでは文字列として受け取るためstring型にしている
     updatedAt: string;
