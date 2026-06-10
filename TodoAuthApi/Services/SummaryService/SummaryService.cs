@@ -17,13 +17,13 @@ namespace TodoAuthApi.Services.SummaryService
 
         public async Task<string> GenerateSummaryAsync(string description)
         {
+            Console.WriteLine("Functions Summary is Triggered");
             if (String.IsNullOrWhiteSpace(description))
             {
                 return description;
             }
 
             string baseUrl = _configuration["AzureFunctions:SummaryUrl"]!;
-            Console.WriteLine(baseUrl);
             string functionKey = _configuration["AzureFunctions:FunctionKey"]!;
             // azure functionsをクラウド上で動かすならばcode=が必要になるから修正が今後必要になるかもしれない
             string url = $"{baseUrl}?Code={functionKey}";
