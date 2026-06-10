@@ -26,7 +26,7 @@ namespace TodoAuthApi.Services.SummaryService
             string baseUrl = _configuration["AzureFunctions:SummaryUrl"]!;
             string functionKey = _configuration["AzureFunctions:FunctionKey"]!;
             // azure functionsをクラウド上で動かすならばcode=が必要になるから修正が今後必要になるかもしれない
-            string url = $"{baseUrl}?Code={functionKey}";
+            string url = $"{baseUrl}?code={functionKey}"; 
 
             var summaryRequest = new SummaryRequest
             {
