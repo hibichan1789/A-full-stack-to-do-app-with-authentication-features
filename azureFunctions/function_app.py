@@ -4,12 +4,8 @@ from pydantic import ValidationError
 import json
 
 from models.summary_type import SummaryRequest, SummaryResponse
+from services.summary_service import summarize
 
-# あとでsummarize関数をopenAI連携取れるように改良する
-def summarize(description:str)->str:
-    if len(description) <= 30:
-        return description
-    return description[:30]
 
 app = func.FunctionApp(http_auth_level=func.AuthLevel.FUNCTION)
 
