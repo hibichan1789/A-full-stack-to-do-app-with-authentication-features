@@ -4,6 +4,8 @@ obj/
 out/
 *.user
 *.suo
+appsettings.*.json
+
 
 # --- Visual Studio ---
 .vs/
@@ -32,3 +34,4 @@ __azurite_db_*.json
 local.settings.json
 __pycache__
 __blobstorage__
+__queuestorage__
