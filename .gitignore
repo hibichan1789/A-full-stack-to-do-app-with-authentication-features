@@ -14,11 +14,12 @@ appsettings.*.json
 .vscode
 # --- Node / Vite ---
 node_modules/
-dist/
+dist
 *.log
 
 # --- Environment ---
 .env
+.env.production
 .venv
 
 # --- Docker ---
