@@ -26,7 +26,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontend",
             policy =>
             {
-                policy.WithOrigins("http://localhost:5173", "https://localhost:5173")
+                policy.WithOrigins("http://localhost:5173", "https://localhost:5173", "https://orange-river-07d44f000.7.azurestaticapps.net")
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials();
@@ -107,14 +107,14 @@ var app = builder.Build();
 
 
 // Configure the HTTP request pipeline.
-//if (!app.Environment.IsProduction())
-//{
+if (!app.Environment.IsProduction())
+{
     app.UseSwagger();
     app.UseSwaggerUI(options =>
     {
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
     });
-//}
+}
 
 
 
