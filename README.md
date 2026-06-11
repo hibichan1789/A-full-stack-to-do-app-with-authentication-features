@@ -1,29 +1,40 @@
 # JWT認証機能付きフルスタックTodoアプリ、要約機能付き
 
+JWT 認証付きの Todo アプリに、OpenAI を使ったキーワード抽出（要約）機能を追加したフルスタックアプリ  
+
+## Demo (Production)  
+コスト節約のため無料枠であるのでコールドスタートとなり最初の立ち上がりは遅い場合があります  
+https://orange-river-07d44f000.7.azurestaticapps.net
+
+## 概要  
 PostgreSQLをDocker,ASP.NET Core APIとVite Vanilla TSはローカルで開発する 
-StyleはTailwind CSSを採用 
 ASP.NET Core APIからAzure Functions経由してpythonからOpenAI APIを呼び出しキーワード抽出機能の実装  
 ASP.NET Core APIから直接OpenAI APIを呼び出して、azure functions経由とASP.NET Core APIとの実行速度検証用エンドポイントの実装  
 
-Azure FunctionsとAzure Database for PostgreSQLのデプロイ
+## 構成図ローカル  
+![Local Architecture](./docs/architecture-local.png)  
+
+## 構成図本番  
+![Production Architecture](./docs/architecture-prod.png)  
+
 ## 技術選定理由
-- PostgreSQL
+- PostgreSQL  
 DB を簡単に作り直せるため、学習段階で扱いやすい  
 アプリ本体はローカルで動かし、DB だけ Docker 化することで開発の複雑さを抑えた  
-- ASP.NET Core API + Vite + TypeScript
+- ASP.NET Core API + Vite + TypeScript  
 API とフロントを完全分離し、開発効率を向上  
 Vite により高速なホットリロードが可能  
 Tailwind CSS により HTML/TS 内で直接スタイル調整ができる  
-- JWT認証
+- JWT認証  
 セッション管理不要でステートレス  
-- tailwind css
+- tailwind css  
 HTML,Typescriptファイルに直接スタイルを書き込めるためUI調整がしやさと開発効率の向上  
-- Azure Functions(Python)
+- Azure Functions(Python)  
 要約処理は負荷が変動しやすいため、API 本体から切り離してサーバーレスで実行  
-Python で柔軟に AI ロジックを記述できる  
+Python で柔軟に AI ロジックを記述できる   
 Pydantic により ASP.NET Core と型安全に連携  
 curl で即テストできるため開発が高速  
-- ASP.NET Core APIから直接OpenAI APIを叩く方式
+- ASP.NET Core APIから直接OpenAI APIを叩く方式  
 Functions 経由との速度比較のため  
 C# の OpenAI SDK を利用し、最適な方式を検証できるようにした  
 
