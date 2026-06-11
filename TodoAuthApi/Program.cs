@@ -26,7 +26,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontend",
             policy =>
             {
-                policy.WithOrigins("http://localhost:5173")
+                policy.WithOrigins("http://localhost:5173", "https://localhost:5173")
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials();
@@ -107,20 +107,22 @@ var app = builder.Build();
 
 
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsProduction())
-{
+//if (!app.Environment.IsProduction())
+//{
     app.UseSwagger();
     app.UseSwaggerUI(options =>
     {
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
     });
-}
+//}
 
-// CORS
-app.UseCors("AllowFrontend");
+
 
 app.UseHttpsRedirection();
 app.UseRouting();
+
+// CORS
+app.UseCors("AllowFrontend");
 
 // ”FØE”F‰Â
 app.UseAuthentication();

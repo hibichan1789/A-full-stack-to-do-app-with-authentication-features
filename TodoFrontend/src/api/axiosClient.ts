@@ -2,8 +2,9 @@ import axios from "axios";
 
 // axiosインスタンスの作成
 // axios.create()は自分専用にカスタマイズしたインスタンスを作成するメソッド
+const baseURL:string = import.meta.env.VITE_API_BASE_URL;
 export const api = axios.create({
-    baseURL: "http://localhost:5175/api", // ここにASP.NET Core APIのURLのベースURLのして
+    baseURL: baseURL, // ここにASP.NET Core APIのURLのベースURLのして
     timeout: 10*1000,// タイムアウト時間（ミリ秒）
 });
 
