@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
@@ -74,6 +75,26 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization();
 
+// Rate Limit
+builder.Services.AddRateLimiter(options => {
+    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+    options.AddFixedWindowLimiter("ProductionLoginPolicy", limiterOptions => 
+        {
+            limiterOptions.PermitLimit = 40;
+            limiterOptions.Window = TimeSpan.FromMinutes(1);
+            limiterOptions.QueueLimit = 0;
+            limiterOptions.QueueProcessingOrder = System.Threading.RateLimiting.QueueProcessingOrder.OldestFirst;
+        });
+
+        options.AddFixedWindowLimiter("ProductionRegisterPolicy", limiterOptions =>
+        {
+            limiterOptions.PermitLimit = 30;
+            limiterOptions.Window = TimeSpan.FromMinutes(1);
+            limiterOptions.QueueLimit = 0;
+            limiterOptions.QueueProcessingOrder = System.Threading.RateLimiting.QueueProcessingOrder.OldestFirst;
+        });
+});
+
 // Custom Service
 builder.Services.AddScoped<IRegisterService, RegisterService>();
 builder.Services.AddScoped<ILoginService, LoginService>();
@@ -82,6 +103,8 @@ builder.Services.AddHttpClient<ISummaryService, SummaryService>();
 
 
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsProduction())
@@ -96,12 +119,21 @@ if (!app.Environment.IsProduction())
 // CORS
 app.UseCors("AllowFrontend");
 
+app.UseHttpsRedirection();
+app.UseRouting();
+
 // 認証・認可
 app.UseAuthentication();
+
+// Rate Limit(本番とLocalでの検証時)
+if (app.Environment.IsProduction() || app.Environment.EnvironmentName == "Local")
+{
+    app.UseRateLimiter();
+}
+
 app.UseAuthorization();
 
+
+
 app.MapControllers();
-
-app.UseHttpsRedirection();
-
 app.Run();

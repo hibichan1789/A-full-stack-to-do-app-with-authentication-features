@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using TodoAuthApi.DTOs.UserDto;
 using TodoAuthApi.Models;
 using TodoAuthApi.Services.UserService;
@@ -21,6 +22,7 @@ namespace TodoAuthApi.Controllers
 
         // POST: api/User/register
         [HttpPost("register")]
+        [EnableRateLimiting("ProductionRegisterPolicy")]
         public async Task<ActionResult> Register(UserRegisterRequest userRegisterRequest)
         {
             if (!ModelState.IsValid)
@@ -65,6 +67,7 @@ namespace TodoAuthApi.Controllers
         }
 
         [HttpPost("login")]
+        [EnableRateLimiting("ProductionLoginPolicy")]
         public async Task<ActionResult> Login(UserLoginRequest userLoginRequest)
         {
             if (!ModelState.IsValid)
